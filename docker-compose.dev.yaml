@@ -1,0 +1,33 @@
+services:
+  odoo:
+    build: .
+    restart: always
+    environment:
+      - ADMIN_PASSWORD=${ODOO_ADMIN_PASSWORD:-superadmin}
+      - DB_HOST=${ODOO_DB_HOST:-host.docker.internal}
+      - DB_PORT=${ODOO_DB_PORT:-5432}
+      - DB_USER=${ODOO_DB_USER:-odoodeploy}
+      - DB_PASSWORD=${ODOO_DB_PASSWORD:-123456}
+      - LOG_LEVEL=${ODOO_LOG_LEVEL:-info}
+      - DB_FILTER=${ODOO_DB_FILTER:-^odoo18_}
+      - ODOO_WORKERS=${ODOO_WORKERS:-4}
+      - GEVENT_PORT=${ODOO_GEVENT_PORT:-8072}
+    volumes:
+      - odoo_filestore:/var/lib/odoo
+      - odoo_backups:/odoo-backup
+      - odoo_addons:/mnt/extra-addons
+      - ./custom-addons:/mnt/custom-addons
+    ports:
+      - "${ODOO_PORT:-8069}:8069"
+      - "${ODOO_GEVENT_PORT:-8072}:${ODOO_GEVENT_PORT:-8072}"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8069/web/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  odoo_filestore:
+  odoo_backups:
+  odoo_addons:
