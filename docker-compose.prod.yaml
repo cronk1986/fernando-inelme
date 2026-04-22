@@ -12,6 +12,7 @@ services:
       - DB_FILTER=${ODOO_DB_FILTER:-^odoo18x_}
       - ODOO_WORKERS=${ODOO_WORKERS:-1}
       - GEVENT_PORT=${ODOO_GEVENT_PORT:-8072}
+      - ODOO_PORT=${ODOO_PORT:-8069}
     volumes:
       - odooincomed_filestore:/var/lib/odoo
       - odooincomed_backups:/odoo-backup
