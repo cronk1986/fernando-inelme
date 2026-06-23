@@ -36,6 +36,7 @@ https://github.com/OCA/bank-statement-import.git
 https://github.com/OCA/spreadsheet.git
 https://github.com/OCA/product-attribute.git
 https://github.com/OCA/sale-workflow.git
+https://github.com/OCA/account-analytic.git
 "
 
 echo "[INFO] Iniciando entrypoint personalizado para Odoo $ODOO_VERSION"
