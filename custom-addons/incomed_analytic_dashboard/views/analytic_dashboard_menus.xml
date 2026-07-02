@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menu_analytic_dashboard_root"
+        name="Tablero Analítico"
+        parent="account.menu_finance_reports"
+        action="action_analytic_dashboard_report"
+        sequence="99"/>
+
+</odoo>

@@ -1,0 +1,25 @@
+{
+    "name": "Tablero Analítico - Dashboard Financiero",
+    "version": "18.0.1.0.0",
+    "category": "Accounting",
+    "summary": "Dashboard analítico tipo spreadsheet con KPIs de gastos, ingresos y margen",
+    "author": "INCOMED",
+    "website": "https://incomed.es",
+    "license": "LGPL-3",
+    "depends": [
+        "account",
+        "analytic",
+        "account_analytic_parent",
+        "spreadsheet_dashboard",
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/analytic_dashboard_report_views.xml",
+        "views/analytic_dashboard_menus.xml",
+        "data/dashboard_data.xml",
+    ],
+    "demo": [],
+    "installable": True,
+    "application": False,
+    "auto_install": False,
+}
