@@ -67,6 +67,10 @@ class AnalyticDashboardReport(models.Model):
         string="Compañía",
         readonly=True,
     )
+    move_type = fields.Char(
+        string="Tipo de movimiento",
+        readonly=True,
+    )
 
     def init(self):
         """Create SQL view. Uses parent_id from account_analytic_parent (OCA)."""
@@ -85,9 +89,12 @@ class AnalyticDashboardReport(models.Model):
                     CASE WHEN aal.amount >= 0 THEN aal.amount ELSE 0.0 END AS credit,
                     aal.amount AS balance,
                     aal.currency_id AS currency_id,
-                    aal.company_id AS company_id
+                    aal.company_id AS company_id,
+                    am.move_type AS move_type
                 FROM account_analytic_line aal
                 JOIN account_analytic_account aaa ON aaa.id = aal.account_id
+                LEFT JOIN account_move_line aml ON aml.id = aal.move_line_id
+                LEFT JOIN account_move am ON am.id = aml.move_id
                 WHERE aal.account_id IS NOT NULL
             )
         """ % self._table)
